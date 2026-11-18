@@ -24,7 +24,7 @@ Payload data in the C/C++ sources is replaced with placeholders (`/* <shellcode>
 - **Usage examples:**
 
 ```bash
-python Obfuscators/xor_obfuscator.py -i shellcode.txt        # -> shellcode_obfuscated.txt
+python Obfuscators/xor_obfuscator.py -i shellcode.txt        # -> shellcode_xor.txt
 python Obfuscators/rc4_obfuscator.py -i shellcode.txt        # -> shellcode_rc4.txt
 python Obfuscators/ip_hash_obfuscator.py -i shellcode.txt    # -> shellcode_ip.txt
 python Obfuscators/rle_obfuscator.py -i shellcode.txt        # -> shellcode_rle.txt
