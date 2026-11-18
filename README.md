@@ -8,7 +8,7 @@ This repository contains small experiments created as part of **Red Team researc
 
 | Component | Files | Description |
 |---|---|---|
-| Original sample | `Loaders/simple.cpp` | Minimal loader template executing a raw shellcode buffer. |
+| Original sample | `Loaders/loader_simple.cpp` | Minimal loader template executing a raw shellcode buffer. |
 | XOR | `Obfuscators/xor_obfuscator.py`, `loader_xor.cpp` | Single-byte XOR obfuscation (key `0x41`). Loader XOR-decodes in place, copies to RWX memory, and transfers control. |
 | RC4 | `Obfuscators/rc4_obfuscator.py`, `Loaders/loader_rc4.cpp` | RC4 stream obfuscation with a fixed embedded `KEY`. Loader performs RC4 decrypt, copies to RWX memory, and executes. |
 | IP encoding | `Obfuscators/ip_hash_obfuscator.py`, `Loaders/loader_ip.cpp` | Encodes payload bytes as IPv4 dotted strings (4 bytes per address, zero-padded if needed). Loader parses/reconstructs bytes, copies to RWX memory, and executes (IPfuscation-style encoding, not cryptographic hashing). |
