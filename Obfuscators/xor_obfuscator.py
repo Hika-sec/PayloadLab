@@ -45,7 +45,7 @@ def main():
         sys.exit(1)
 
     base, ext = os.path.splitext(args.input)
-    output_path = f"{base}_obfuscated{ext or '.txt'}"
+    output_path = f"{base}_xor{ext or '.txt'}"
 
     obfuscated = xor_obfuscate(shellcode, XOR_KEY)
 
