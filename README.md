@@ -28,7 +28,6 @@ python rc4_obfuscator.py -i shellcode.txt        # -> shellcode_rc4.txt
 python ip_hash_obfuscator.py -i shellcode.txt    # -> shellcode_ip.txt
 python rle_obfuscator.py -i shellcode.txt        # -> shellcode_rle.txt
 python chacha20_obfuscator.py -i shellcode.txt   # -> shellcode_chacha20.txt
-python extract_shellcode.py                      # reads simple.cpp -> shellcode_input.txt
 ```
 
 ## Loaders (C/C++)
