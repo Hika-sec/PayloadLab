@@ -1,6 +1,6 @@
 #include <windows.h>
 
-const char* ip_table[] = { /* <shellcode> */ };
+const char* ip_table[] = { /* <IP List> */ };
 
 const unsigned int IP_COUNT = sizeof(ip_table) / sizeof(ip_table[0]);
 const unsigned int SHELLCODE_SIZE = 324;
