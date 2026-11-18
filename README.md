@@ -49,7 +49,7 @@ g++ -O2 -o loader_rc4.exe Loaders/loader_rc4.cpp
 g++ -O2 -o loader_ip.exe Loaders/loader_ip.cpp
 g++ -O2 -o loader_rle.exe Loaders/loader_rle.cpp
 g++ -O2 -o loader_chacha20.exe Loaders/loader_chacha20.cpp
-g++ -O2 -o simple.exe Loaders/simple.cpp
+g++ -O2 -o loader_simple.exe Loaders/loader_simple.cpp
 ```
 
 - **Architecture:** the sample shellcode is x86 (32-bit). Build and run with a matching architecture/OS (Windows).
